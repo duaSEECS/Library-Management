@@ -67,8 +67,9 @@ namespace Library_Management_System
                             TimeSpan t= tr-now;
                             double days = t.TotalDays;
                             int remain = (int)days;
-                            MessageBox.Show(remain.ToString());
+                            //MessageBox.Show(remain.ToString());
                             if (remain <= 0) {
+                                int count = remain * -1;
                                 MySqlCommand cmd3 = new MySqlCommand("SELECT Type FROM artifacts where Id = '" + dr["Artifact_id"] + "'"   , databaseConnection);
                                 MySqlDataAdapter d2 = new MySqlDataAdapter(cmd3);
                                 DataTable dt2 = new DataTable();
@@ -76,15 +77,22 @@ namespace Library_Management_System
                                 foreach (DataRow dr2 in dt2.Rows) {
                                     if (dr2["type"].ToString() == "Book")
                                     {
-                                        fine += 50;
+                                        for (int i = 0; i < count; i++)
+                                        {
+                                            fine += 50;
+                                        }
                                     }
                                     else {
-                                        fine += 100;
+                                        for (int i = 0; i < count; i++)
+                                        {
+                                            fine += 100;
+                                        }
                                     }
                                 }
                             }
-                            MessageBox.Show("Your Fine is : " + fine);
+                            
                         }
+                        MessageBox.Show("Your Fine is : " + fine);
                     }
                  
 
